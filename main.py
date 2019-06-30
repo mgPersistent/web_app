@@ -107,7 +107,5 @@ def update_employee(pre_id, employee):
     return True
 
 
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
