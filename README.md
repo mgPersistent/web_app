@@ -3,8 +3,11 @@
 This project is an example for performing CRUD operations over REST API using Flask.
 
 #### Features:
+
 > Routing with HTTP methods.
+
 > Basic CRUD Operations.
+
 > Database Integration while performing Insert and Update Operations.
 
 
