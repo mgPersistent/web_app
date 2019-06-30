@@ -1,5 +1,5 @@
 from flask import(
-    Flask, url_for, redirect, render_template, request, abort
+    Flask, url_for, redirect, render_template, request, make_response, send_file
 )
 import connection
 import sqlite3
@@ -13,6 +13,20 @@ connection.createDB()
 def index():
     employees = get_employees()
     return render_template('index.html', employees=employees)
+
+
+@app.route('/data.csv')
+def download_csv():
+    with sqlite3.connect('database.db') as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute('select * from employee')
+        rows = cur.fetchall()
+        csv = ''
+        for row in rows:
+            csv += ','.join([row['id'], row['name'], row['dob'], row['gender'], row['email'], row['contact']])
+            csv += '\n'
+        return make_response(csv, 200, {'content-type': 'text/csv'})
 
 
 @app.route('/add', methods=['POST'])

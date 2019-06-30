@@ -96,40 +96,7 @@ var pre_id=null
 
      $("#download_csv").click(function(){
 
-        var data = [];
-
-          $('.table td').each(function() {
-            data.push($(this).text());
-          });
-
-        var csv="";
-        for(var i=0;i<data.length;i++){
-            if(i!=0||i!=7)
-                csv+=data[i];
-            if((i+1) % 8==0)
-                csv+="\n";
-            else
-                if(i==0 || i==6)
-                    continue
-                else
-                    csv+=",";
-        }
-
-        function download(filename, text) {
-          var element = document.createElement('a');
-          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-          element.setAttribute('download', filename);
-
-          element.style.display = 'none';
-          document.body.appendChild(element);
-
-          element.click();
-
-          document.body.removeChild(element);
-        }
-
-
-        download('data.csv',csv);
+        window.open('/data.csv','_blank');
 
     });
 
