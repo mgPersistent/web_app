@@ -1,3 +1,8 @@
+
+    $("#id").focus(function(){
+        $(this).css('border-color','red');
+    });
+
 $(document).ready(function(){
 var image=null;
 var is_updated=false;
@@ -15,9 +20,6 @@ var pre_id=null
 
     });
 
-    #("#id").focus(function(){
-        $(this).css('border-color','red');
-    });
 
     $("#submit").click(function(){
           var id = $('#id').val();
