@@ -11,6 +11,9 @@
 </head>
 <body>
     <div class="container">
+         <div class="alert alert-danger" id="InsertError">
+            <strong>Error!</strong> Employee Id already exists .
+          </div>
         <div id="frame_1">
         <div class="text-right">
         <div class="btn-group ">
@@ -34,14 +37,15 @@
             {% if employees %}
                 {% for e in employees %}
                     <tr>
-                        <td><div id="logo" image_data="{{e[6]}}" style="background-image:url('{{e[6]}}');"></div></td>
-                        <td>{{e[0]}}</td>
-                        <td>{{e[1]}}</td>
-                        <td>{{e[2]}}</td>
-                        <td>{{e[3]}}</td>
-                        <td>{{e[4]}}</td>
-                        <td>{{e[5]}}</td>
+                        <td><div id="logo" image_data="{{e['image']}}" style="background-image:url('{{e[6]}}');"></div></td>
+                        <td>{{e['id']}}</td>
+                        <td>{{e['name']}}</td>
+                        <td>{{e['dob']}}</td>
+                        <td>{{e['gender']}}</td>
+                        <td>{{e['email']}}</td>
+                        <td>{{e['contact']}}</td>
                         <td><image src="/static/Edit.png" height="25px" class="editBtn"/></td>
+                        <td><image src="/static/remove.png" height="25px" class="removeBtn"/></td>
                     </tr>
                 {% endfor %}
             {% endif %}

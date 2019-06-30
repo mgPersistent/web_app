@@ -13,7 +13,14 @@ background-size:cover;
 background-position:center;
 }
 
+#InsertError{
+display:None;}
+
 .editBtn{
+cursor:pointer;}
+
+
+.removeBtn{
 cursor:pointer;}
 
 #myTable{

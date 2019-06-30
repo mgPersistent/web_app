@@ -15,7 +15,9 @@ var pre_id=null
 
     });
 
-
+    #("#id").focus(function(){
+        $(this).css('border-color','red');
+    });
 
     $("#submit").click(function(){
           var id = $('#id').val();
@@ -65,27 +67,46 @@ var pre_id=null
                 var empJSON=JSON.stringify(emp)
 
                 if(is_updated==false){
-                  $.post("add",
-                  {
-                    data:empJSON
-                  },
-                  function(data, status){
-                    if(data='Created!!' && status=='success'){
-                        window.location="/";
-                    }
-                  });
+
+                   $.ajax({
+                        url: '/emp',
+                        data:{
+                                data:empJSON
+                             },
+                        type: 'POST',
+                        success: function(result) {
+                            if(result == 'Created!!'){
+                                 window.location="/";
+                             }
+                        },
+                        error: function(error){
+                            $('#InsertError').fadeIn();
+                            setTimeout(function(){ $('#InsertError').hide(); }, 4000);
+                            $("#id").focus();
+                        }
+                    });
+
+
                 }
                 else{
-                    $.post("update",
-                  {
-                    pre_id:pre_id,
-                    data:empJSON
-                  },
-                  function(data, status){
-                    if(data='Updated!!' && status=='success'){
-                        window.location="/";
-                    }
-                  });
+                    $.ajax({
+                        url: '/emp',
+                        data:{
+                                pre_id:pre_id,
+                                data:empJSON
+                             },
+                        type: 'PUT',
+                        success: function(result) {
+                            if(result == 'Updated!!'){
+                                 window.location="/";
+                             }
+                        },
+                        error: function(error){
+                            $('#InsertError').fadeIn();
+                            setTimeout(function(){ $('#InsertError').hide(); }, 4000);
+                             $("#id").focus();
+                        }
+                    });
                 }
 
             }
@@ -139,9 +160,26 @@ $(".editBtn").click(function(){
     $("#imagePreview").attr("style","background-image:url("+$(pre_img).attr("image_data")+")");
     is_updated=true;
 
+});
 
-
-
+$(".removeBtn").click(function(){
+    var td=$(this).parent();
+    var tr=$(td).parent();
+    var td_data=$(tr).children();
+    pre_id=$(td_data[1]).html();
+    console.log(pre_id);
+    $.ajax({
+        url: '/emp',
+        data:{
+                pre_id: pre_id,
+             },
+        type: 'DELETE',
+        success: function(result) {
+            if(result == 'Deleted!!'){
+                 window.location="/";
+             }
+        }
+    });
 });
 
 });
