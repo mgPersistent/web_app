@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Data</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}" ></script>
+    <script src="{{url_for('static',filename='js/jquery-3.4.1.min.js')}}" ></script>
+    <script src="{{url_for('static',filename='js/jquery.autocomplete.js')}}" ></script>
+</head>
+<body>
+    <div class="container">
+        <div id="frame_1">
+        <div class="text-right">
+        <div class="btn-group ">
+          <button type="button" id="add_emp" class="btn btn-success">Add Employee</button>
+          <button type="button" id="download_csv" class="btn btn-success">Download CSV</button>
+        </div>
+        </div>
+        <table class="table table-dark table-hover" id="myTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if employees %}
+                {% for e in employees %}
+                    <tr>
+                        <td><div id="logo" image_data="{{e[6]}}" style="background-image:url('{{e[6]}}');"></div></td>
+                        <td>{{e[0]}}</td>
+                        <td>{{e[1]}}</td>
+                        <td>{{e[2]}}</td>
+                        <td>{{e[3]}}</td>
+                        <td>{{e[4]}}</td>
+                        <td>{{e[5]}}</td>
+                        <td><image src="/static/Edit.png" height="25px" class="editBtn"/></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+
+        </table>
+
+        </div>
+        <div id="frame_2">
+            <div id="frame_2_1">
+            <form >
+
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <div class="autocomplete" style="width:300px;">
+                    <input id="name" class="form-control" type="text" placeholder="Employee Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="id">Employee Id:</label>
+                <input type="text" class="form-control" id="id" placeholder="XXXXXX" required>
+              </div>
+              <div class="form-group">
+                  <label for="gender">Select list:</label>
+                  <select class="form-control" id="gender" required>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                <label for="dob">Date of birth:</label>
+                <input type="date" class="form-control" id="dob" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email" placeholder="abc@xyz.com" required>
+              </div>
+              <div class="form-group">
+                <label for="contact">Contact:</label>
+                <input type="text" class="form-control" id="contact" placeholder="XXXXXXXXXX" required>
+              </div>
+              <button type="button" id="cancel" class="btn btn-success float-left">Cancel</button>
+              <button type="button" id="submit" class="btn btn-primary float-right">Submit</button>
+            </form>
+        </div>
+
+
+        <div id="frame_2_2">
+         <div class="avatar-upload">
+            <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"></label>
+            </div>
+            <div class="avatar-preview">
+                <div id="imagePreview" style="background-image: url('/static/pic.jpeg');">
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='js/custom.js')}}" ></script>
+
+</body>
+</html>
