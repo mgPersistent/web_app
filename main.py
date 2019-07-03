@@ -4,6 +4,10 @@ from flask import(
 import connection
 import sqlite3
 import json
+import requests
+from constants import (
+    header, search_url
+)
 
 app = Flask(__name__)
 connection.createDB()
@@ -56,6 +60,21 @@ def delete():
         cur.execute("delete from employee where id=?", (pre_id,))
         con.commit()
     return make_response("Deleted!!", 200)
+
+
+@app.route('/suggest/<name>', methods=['GET'])
+def suggest(name):
+
+    r = requests.get(search_url(name), headers=header)
+    data = json.loads(r.text)
+    users = []
+    for i in data['PrimaryQueryResult']['RelevantResults']['Table']['Rows']:
+        mail = i['Cells'][21]['Value']
+        fullname = i['Cells'][14]['Value']
+        pic = i['Cells'][13]['Value']
+        name = mail[:mail.index('@')]
+        users.append({'value': name, 'data': [fullname, mail]})
+    return make_response(json.dumps(users), 200, {'content-type': 'application/json'})
 
 
 def get_employees():

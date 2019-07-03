@@ -1,10 +1,37 @@
+var image_autofilled=false;
+var autofill_image=null;
+var image=null;
 
     $("#id").focus(function(){
         $(this).css('border-color','red');
     });
 
+    $('#name').autocomplete({
+    lookup: function (query, done) {
+     var result= null;
+
+    $.get( "/suggest/"+query
+        ,function(data){
+
+        console.log(data)
+        result={suggestions:data};
+        done(result);
+
+    });
+    },
+    onSelect: function (suggestions) {
+        $("#name").val(suggestions.data[0]);
+        $("#email").val(suggestions.data[1]);
+        autofill_image="https://persistentsystems.sharepoint.com/sites/Pi/_layouts/15/userphoto.aspx?size=L&username="+suggestions.data[1];
+        $("#imagePreview").attr("style","background-image:url("+autofill_image+")");
+        image_autofilled=true;
+        image=autofill_image;
+    }
+});
+
 $(document).ready(function(){
-var image=null;
+
+
 var is_updated=false;
 var pre_id=null
 
@@ -58,7 +85,7 @@ var pre_id=null
               alert('Please enter a valid Email Id');
               $('#email').focus();
             }
-            else if(image==null)
+            else if(image==null && image_autofilled==false)
             {
               alert('Please upload picture');
             }
