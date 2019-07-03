@@ -182,8 +182,8 @@ $(".editBtn").click(function(){
     $("#name").val($(td_data[2]).html());
     $("#dob").val($(td_data[3]).html());
     $("#gender").val($(td_data[4]).html());
-    $("#email").val($(td_data[6]).html());
-    $("#contact").val($(td_data[5]).html());
+    $("#email").val($(td_data[5]).html());
+    $("#contact").val($(td_data[6]).html());
     var pre_img=$(td_data[0]).children()[0];
     image=$(pre_img).attr("image_data");
     $("#imagePreview").attr("style","background-image:url("+$(pre_img).attr("image_data")+")");
