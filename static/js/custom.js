@@ -9,15 +9,15 @@ var image=null;
     $('#name').autocomplete({
     lookup: function (query, done) {
      var result= null;
-
+    if(query.length>=3){
     $.get( "/suggest/"+query
         ,function(data){
 
         console.log(data)
         result={suggestions:data};
         done(result);
-
     });
+    }
     },
     onSelect: function (suggestions) {
         $("#name").val(suggestions.data[0]);

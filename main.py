@@ -69,11 +69,12 @@ def suggest(name):
     data = json.loads(r.text)
     users = []
     for i in data['PrimaryQueryResult']['RelevantResults']['Table']['Rows']:
-        mail = i['Cells'][21]['Value']
-        fullname = i['Cells'][14]['Value']
-        pic = i['Cells'][13]['Value']
-        name = mail[:mail.index('@')]
-        users.append({'value': name, 'data': [fullname, mail]})
+        if i:
+            mail = i['Cells'][21]['Value']
+            fullname = i['Cells'][14]['Value']
+            # pic = i['Cells'][13]['Value']
+            name = mail[:mail.index('@')]
+            users.append({'value': name, 'data': [fullname, mail]})
     return make_response(json.dumps(users), 200, {'content-type': 'application/json'})
 
 
