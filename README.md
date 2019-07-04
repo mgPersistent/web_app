@@ -8,6 +8,8 @@ This project is an example for performing CRUD operations over REST API using Fl
 
 > Basic CRUD Operations.
 
+> Autocomplete & Suggestions of name,email & image by Sharepoint People Search API. 
+
 > Database Integration while performing Insert and Update Operations.
 
 
