@@ -11,7 +11,7 @@ This project is an example for performing CRUD operations over REST API using Fl
 > Database Integration while performing Insert and Update Operations.
 
 
-[![N|Solid](https://raw.githubusercontent.com/mgPersistent/web_app/master/static/snap/1.png)](Index)
+[![N|Solid](https://raw.githubusercontent.com/mgPersistent/web_app/master/static/snap/1.PNG)](Index)
 
 [![N|Solid](https://raw.githubusercontent.com/mgPersistent/web_app/master/static/snap/2.png)](Index)
 
@@ -21,11 +21,12 @@ This project is an example for performing CRUD operations over REST API using Fl
 
 ### Usage
 
-This application has dependencies over Flask, PIP.
+This application has dependencies over Flask,Requests, PIP.
 To run this project simply run :
 
 ```sh
 $ pip install flask
+$ pip install requests
 ```
 then navigate to project directory and run:
 ```sh
